@@ -1,0 +1,73 @@
+### 1. GET all recipes
+GET http://localhost:8080/api/v1/recipes
+Authorization: Basic admin admin
+Accept: application/json
+###
+
+### 2. GET recipe by id
+GET http://localhost:8080/api/v1/recipes/1
+Authorization: Basic admin admin
+Accept: application/json
+###
+
+### 3. GET all recipes - bad username (expect 401)
+GET http://localhost:8080/api/v1/recipes
+Authorization: Basic admin1 admin
+Accept: application/json
+###
+
+### 4. GET all recipes - no Authorization header (expect 401)
+GET http://localhost:8080/api/v1/recipes
+Accept: application/json
+###
+
+### 5. POST create a recipe
+POST http://localhost:8080/api/v1/recipes
+Authorization: Basic admin admin
+Content-Type: application/json
+
+{
+  "id": "5",
+  "name": "Банош",
+  "description": "Гуцульська кукурудзяна каша на сметані з бринзою та шкварками",
+  "cookingTimeMinutes": 30,
+  "difficulty": "Легкий"
+}
+###
+
+### 6. GET all recipes - confirm recipe was created
+GET http://localhost:8080/api/v1/recipes
+Authorization: Basic admin admin
+Accept: application/json
+###
+
+### 7. GET recipe by id - the newly created one
+GET http://localhost:8080/api/v1/recipes/5
+Authorization: Basic admin admin
+Accept: application/json
+###
+
+### 8. PUT update the newly created recipe
+PUT http://localhost:8080/api/v1/recipes/5
+Authorization: Basic admin admin
+Content-Type: application/json
+
+{
+  "id": "5",
+  "name": "Банош з бринзою",
+  "description": "Гуцульська кукурудзяна каша на сметані, подається з бринзою та шкварками",
+  "cookingTimeMinutes": 35,
+  "difficulty": "Середній"
+}
+###
+
+### 9. DELETE the recipe
+DELETE http://localhost:8080/api/v1/recipes/5
+Authorization: Basic admin admin
+###
+
+### 10. GET recipe by id - confirm it was deleted (expect 404)
+GET http://localhost:8080/api/v1/recipes/5
+Authorization: Basic admin admin
+Accept: application/json
+###
